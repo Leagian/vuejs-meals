@@ -15,7 +15,12 @@
       :key="meal.idMeal"
       class="bg-white shadow rounded-xl"
     >
-      <router-link to="/">
+      <router-link
+        :to="{
+          name: 'mealDetails',
+          params: { id: meal.idMeal },
+        }"
+      >
         <img
           :src="meal.strMealThumb"
           :alt="strMeal"
@@ -26,10 +31,12 @@
       <div class="p-3">
         <h3 class="font-bold">{{ meal.strMeal }}</h3>
         <p class="mb-4">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur
-          recusandae asperiores accusantium quos aliquam ab, vitae obcaecati
-          omnis, odio fugit excepturi culpa voluptatem distinctio molestias, est
-          facilis molestiae officia quasi.
+          Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Pariatur recusandae asperiores
+          accusantium quos aliquam ab, vitae obcaecati
+          omnis, odio fugit excepturi culpa voluptatem
+          distinctio molestias, est facilis molestiae
+          officia quasi.
         </p>
         <div class="flex items-center justify-between">
           <a
@@ -45,17 +52,17 @@
 </template>
 
 <script setup>
-import { computed } from "@vue/reactivity";
-import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
-import store from "../store";
+import { computed } from '@vue/reactivity';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import store from '../store';
 
 const route = useRoute();
-const keyword = ref("");
+const keyword = ref('');
 const meals = computed(() => store.state.searchedMeals);
 
 function searchMeals() {
-  store.dispatch("searchMeals", keyword.value);
+  store.dispatch('searchMeals', keyword.value);
 }
 
 onMounted(() => {
